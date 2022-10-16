@@ -108,6 +108,7 @@ type HyperlinkSegment struct {
 	Alignment fyne.TextAlign
 	Text      string
 	URL       *url.URL
+	OnTapped  func()
 }
 
 // Inline returns true as hyperlinks are inside other elements.
@@ -124,6 +125,7 @@ func (h *HyperlinkSegment) Textual() string {
 func (h *HyperlinkSegment) Visual() fyne.CanvasObject {
 	link := NewHyperlink(h.Text, h.URL)
 	link.Alignment = h.Alignment
+	link.OnTapped = h.OnTapped
 	return &fyne.Container{Layout: &unpadTextWidgetLayout{}, Objects: []fyne.CanvasObject{link}}
 }
 
